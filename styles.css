@@ -15,19 +15,41 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    height: 100vh; /* Full viewport height */
-    overflow: hidden; /* Prevent internal scroll */
-    /* existing styles below */
+    height: 100vh;
     width: 220px;
     background-color: #2c3e50;
     padding: 20px;
-    border-radius: 0 20px 20px 0px;
+    border-radius: 0 20px 20px 0;
     color: white;
     display: flex;
     flex-direction: column;
     gap: 15px;
     border: 4px solid #5d6d7e;
     border-left: none;
+    transition: width 0.3s; /* Smooth transition for width change */
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+}
+
+@media (max-width: 880px) {
+    .sidebar {
+        width: 0; /* Set width to 0 for smaller screens */
+        overflow: hidden; /* Hide overflow content */
+        padding: 0; /* Ensure padding is 0 */
+        margin: 0; /* Ensure margin is 0 */
+        border: none; /* Ensure no border is present */
+    }
+    #content {
+        margin-left: 20px !important; /* Adjust margin-left for smaller screens */
+    }
+    .title-bar {
+        left: 20px !important;
+    }
+}
+
+@media (max-width: 1300px) {
+    .title-bar h2 {
+        display: none !important; /* Hide h2 in title bar for smaller screens */
+    }
 }
 
 .title-bar {
@@ -38,12 +60,9 @@ body {
     height: 80px;
     background-color: #34495e;
     color: white;
-
     display: flex;
     align-items: center;
-    padding-left: 40px;
-    padding-right: 40px;
-
+    padding: 0 40px;
     border: 4px solid #5d6d7e;
     border-top: none;
     border-radius: 0 0 20px 20px;
@@ -65,7 +84,7 @@ body {
     font-size: 1.8rem;
     font-weight: 700;
     margin: 0;
-    white-space: nowrap; /* prevent wrapping */
+    white-space: nowrap;
 }
 
 /* Content area */
@@ -75,49 +94,17 @@ body {
     margin-top: 80px;
     padding: 20px;
 }
-/* New styles for sidebar toggle */
-#menu-toggle {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 1001;
-    background-color: #007bff;
+
+/* Navigation items */
+.nav-item {
+    text-decoration: none;
     color: white;
-    border: none;
     padding: 10px 15px;
-    font-size: 1.5rem;
-    border-radius: 5px;
-    cursor: pointer;
-    display: none; /* Hidden by default, visible on small screens */
+    background-color: #3b5998;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
 }
 
-#menu-toggle:hover {
-    background-color: #0056b3;
-}
-
-/* Sidebar responsiveness */
-@media (max-width: 768px) {
-    #menu-toggle {
-        display: block; /* Show menu button on small screens */
-    }
-
-    #sidebar {
-        transform: translateX(-100%); /* Hide sidebar */
-        transition: transform 0.3s ease-in-out;
-    }
-
-    #sidebar.open {
-        transform: translateX(0); /* Show sidebar */
-    }
-
-    .title-bar {
-        left: 0; /* Adjust title-bar for hidden sidebar */
-    }
-
-    #content {
-        margin-left: 0;
-    }
-}
 .nav-item:hover {
     background-color: #e0ca3c;
 }
@@ -126,58 +113,54 @@ body {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #007bff; /* Blue color, change as you like */
+    background-color: #007bff;
     color: white;
     padding: 10px 15px;
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    z-index: 1000; /* Make sure it stays on top */
+    z-index: 1000;
 }
 
 .donate-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3;
 }
 
-h1 {
+h1,
+h2 {
     font-size: 2rem;
-    color: #34495e; /* matches title-bar bg */
+    color: #34495e;
     font-weight: 700;
     margin-bottom: 0.8rem;
     line-height: 1.2;
-    border-bottom: 2px solid #34495e; /* underline */
-    padding-bottom: 0.2rem; /* space between text and underline */
+    border-bottom: 2px solid #34495e;
+    padding-bottom: 0.2rem;
 }
 
 h2 {
-    font-size: 2rem;
-    color: #34495e; /* matches title-bar bg */
-    font-weight: 700;
-    margin-bottom: 0.8rem;
-    line-height: 1.2;
     margin-top: 20px;
 }
 
 h3 {
     font-size: 1.4rem;
-    color: #5d6d7e; /* lighter, softer color */
+    color: #5d6d7e;
     font-weight: 600;
     margin-bottom: 1rem;
 }
 
 p {
     font-size: 1rem;
-    color: #2c3e50; /* matches sidebar bg color for consistency */
+    color: #2c3e50;
     line-height: 1.5;
     margin-bottom: 1.25rem;
 }
 
-/* subtle highlight for email */
 a {
     color: #007bff;
     text-decoration: underline;
     font-weight: 600;
+    transition: color 0.3s ease;
 }
 
 a:hover {
@@ -204,35 +187,24 @@ a:hover {
     transition: color 0.3s ease;
 }
 
-/* Icons consistent in size and spacing */
 .social-links i {
     font-size: 1.5em;
     margin-right: 10px;
 }
 
-/* Platform-specific colors for brand recognition */
 .social-links a[href*="facebook.com"] {
     color: #3b5998;
 }
-
 .social-links a[href*="instagram.com"] {
     color: #e4405f;
 }
-
 .social-links a[href*="tiktok.com"] {
     color: #000000;
 }
-
 .social-links a[href*="mailto"] {
-    color: #d44638;
+    color: #d;
 }
-
-.social-links a[href*="twitter.com"] {
-    color: #1da1f2;
-}
-
-/* Hover effect consistent with site style */
-.social-links a:hover {
-    color: #e0ca3c;
-    text-decoration: none;
+.container {
+    display: flex;
+    height: 100vh; /* Full height of the viewport */
 }
